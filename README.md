@@ -1,6 +1,6 @@
 # TV Show Browser
 
-A Vue 3 application that allows users to browse TV shows using the TVMaze API.
+A Vue 3 application that allows users to browse TV shows using the [TVMaze API](https://www.tvmaze.com/api).
 
 ## Tech Stack
 
@@ -17,7 +17,7 @@ A Vue 3 application that allows users to browse TV shows using the TVMaze API.
 ## Prerequisites
 
 - Node.js v22.15.1
-- npm (latest stable version)
+- npm 11.3.0
 
 ## Setup
 
