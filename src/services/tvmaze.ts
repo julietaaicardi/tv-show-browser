@@ -15,6 +15,7 @@ export async function getShowById(id: number): Promise<Show> {
   return data
 }
 
+// TODO: check if I use this endpoint
 export async function searchShows(query: string): Promise<Show[]> {
   const { data } = await api.get(`/search/shows?q=${encodeURIComponent(query)}`)
   return data.map((item: { show: Show }) => item.show)

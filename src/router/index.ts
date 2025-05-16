@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardView from '../views/DashboardView.vue'
+import HomePage from '../views/HomePage.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'dashboard',
-    component: DashboardView,
+    name: 'homepage',
+    component: HomePage,
   },
   {
     path: '/show/:id',
     name: 'show-detail',
-    component: () => import('../views/ShowDetailView.vue'),
+    component: () => import('../views/ShowDetail.vue'),
   },
 ]
 
