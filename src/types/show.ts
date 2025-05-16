@@ -3,17 +3,17 @@ export interface Show {
   id: number
   name: string
   summary: string
-  image?: {
+  image: {
     medium: string
     original: string
   }
-  rating?: {
+  rating: {
     average: number
   }
   genres: string[]
   status: string
-  premiered?: string
-  network?: {
+  premiered: string
+  network: {
     name: string
   }
 } 

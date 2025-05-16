@@ -10,17 +10,22 @@
       </div>
     </div>
 
-    <div v-else-if="error" class="alert alert-danger bg-danger text-light border-danger" role="alert">
+    <div
+      v-else-if="error"
+      class="alert alert-danger bg-danger text-light border-danger"
+      role="alert"
+    >
       {{ error }}
     </div>
 
     <div v-else-if="currentShow" class="row">
       <div class="col-md-4">
-        <img
+        <ImageWithFallback
           v-if="currentShow.image?.original"
           :src="currentShow.image.original"
           :alt="currentShow.name"
-          class="img-fluid rounded"
+          :fallback-text="currentShow.name"
+          class="rounded"
         />
       </div>
       <div class="col-md-8">
@@ -58,6 +63,7 @@ import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShowsStore } from '../stores/shows'
 import { storeToRefs } from 'pinia'
+import ImageWithFallback from '../components/ImageWithFallback.vue'
 
 const route = useRoute()
 const store = useShowsStore()
@@ -69,4 +75,4 @@ onMounted(() => {
     store.fetchShowById(id)
   }
 })
-</script> 
+</script>

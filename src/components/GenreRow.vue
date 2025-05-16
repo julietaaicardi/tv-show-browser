@@ -1,6 +1,6 @@
 <template>
   <ScrollableRow :title="genre">
-    <div v-for="showId in showIds" :key="showId" class="show-card-wrapper overflow-hidden rounded-4">
+    <div v-for="showId in showIds" :key="showId" class="show-card-wrapper overflow-hidden rounded-4 flex-shrink-0">
       <ShowCard :show="showsById[showId]" />
     </div>
   </ScrollableRow>
@@ -21,7 +21,6 @@ defineProps<{
 <style scoped>
 .show-card-wrapper {
   flex: 0 0 auto;
-  flex-shrink: 0;
   scroll-snap-align: start;
   width: 300px;
   max-width: 80vw;
@@ -29,7 +28,7 @@ defineProps<{
 
 @media (max-width: 768px) {
   .show-card-wrapper {
-    width: 180px;
+    width: 200px;
   }
 }
 </style> 

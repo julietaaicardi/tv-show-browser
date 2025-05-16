@@ -48,7 +48,7 @@ src/
 ├── components/     # Reusable Vue components
 ├── views/         # Page components
 ├── stores/        # Pinia stores
-├── services/      # API services
+├── api/      # APIs
 ├── types/         # TypeScript interfaces
 ├── router/        # Vue Router configuration
 └── assets/        # Static assets

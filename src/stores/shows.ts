@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Show } from '../types/show'
-import { getShows, getShowById } from '../services/tvmaze'
+import { getShows, getShowById } from '../api/tvmaze'
 
 type ShowsById = Record<number, Show>
 type Genres = Record<string, number[]>

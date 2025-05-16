@@ -47,26 +47,9 @@ onMounted(() => {
 <style scoped>
 .container-fluid {
   max-width: 1800px;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.genres-container {
-  margin: 0;
 }
 
 .genre-row {
   margin-bottom: 4rem;
-}
-
-@media (min-width: 768px) {
-  .container-fluid {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .genres-container {
-    margin: 0 -1rem;
-  }
 }
 </style>

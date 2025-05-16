@@ -1,3 +1,35 @@
+<template>
+  <h2 class="h4 text-light text-start fw-bold mb-3">{{ title }}</h2>
+  <div class="scrollable-container position-relative w-100">
+    <!-- Left Arrow -->
+    <button
+      v-if="isNonTouchDevice"
+      class="scroll-arrow left fs-2 px-4 d-flex align-items-center justify-content-start position-absolute top-0 bottom-0"
+      :class="{ visible: showLeftArrow }"
+      @click="scrollLeft"
+      aria-label="Scroll left"
+    >
+      <font-awesome-icon :icon="['fas', 'chevron-left']" class="arrow-icon" />
+    </button>
+
+    <!-- Scrollable Content -->
+    <div ref="scrollContainer" class="scrollable-content d-flex flex-nowrap gap-3 w-100 max-w-100">
+      <slot></slot>
+    </div>
+
+    <!-- Right Arrow -->
+    <button
+      v-if="isNonTouchDevice"
+      class="scroll-arrow right fs-2 px-4 d-flex align-items-center justify-content-end position-absolute top-0 bottom-0"
+      :class="{ visible: showRightArrow }"
+      @click="scrollRight"
+      aria-label="Scroll right"
+    >
+      <font-awesome-icon :icon="['fas', 'chevron-right']" class="arrow-icon" />
+    </button>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -68,65 +100,21 @@ onMounted(() => {
 })
 </script>
 
-<template>
-  <div class="scrollable-section w-100">
-    <h2 class="h4 text-light text-start fw-bold mb-3">{{ title }}</h2>
-    <div class="scrollable-container-wrapper">
-      <!-- Left Arrow -->
-      <button
-        v-if="isNonTouchDevice"
-        class="scroll-arrow left fs-2 px-4 d-flex align-items-center justify-content-start"
-        :class="{ visible: showLeftArrow }"
-        @click="scrollLeft"
-        aria-label="Scroll left"
-      >
-        <font-awesome-icon :icon="['fas', 'chevron-left']" class="arrow-icon" />
-      </button>
+<style scoped lang="scss">
+@import '../styles/_variables.scss';
 
-      <!-- Scrollable Content -->
-      <div
-        ref="scrollContainer"
-        class="scrollable-content"
-      >
-        <slot></slot>
-      </div>
-
-      <!-- Right Arrow -->
-      <button
-        v-if="isNonTouchDevice"
-        class="scroll-arrow right fs-2 px-4 d-flex align-items-center justify-content-end"
-        :class="{ visible: showRightArrow }"
-        @click="scrollRight"
-        aria-label="Scroll right"
-      >
-        <font-awesome-icon :icon="['fas', 'chevron-right']" class="arrow-icon" />
-      </button>
-    </div>
-  </div>
-</template>
-
-<style scoped>
-.scrollable-container-wrapper {
-  position: relative;
-  width: 100%;
+.scrollable-container {
   overflow-x: hidden;
 }
 
 .scrollable-content {
-  display: flex;
-  flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 1rem;
   scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
-  max-width: 100%;
-  width: 100%;
   box-sizing: border-box;
-
-/* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -135,24 +123,18 @@ onMounted(() => {
 }
 
 .scroll-arrow {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100px;
   pointer-events: auto;
   z-index: 10;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, color 0.2s ease;
   border: none;
   background: none;
-  color: white;
+  color: $gray-100;
 }
 
 .scroll-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  color: $gray-500;
 }
 
 .scroll-arrow.visible {
@@ -161,12 +143,12 @@ onMounted(() => {
 
 .scroll-arrow.left {
   left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+  background: linear-gradient(to right, rgba(0, 0, 0, 1), transparent);
 }
 
 .scroll-arrow.right {
   right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.7), transparent);
+  background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent);
 }
 
 /* Touch device styles (no arrows, full width content) */
@@ -176,4 +158,4 @@ onMounted(() => {
     scroll-padding: 0.5rem;
   }
 }
-</style> 
+</style>

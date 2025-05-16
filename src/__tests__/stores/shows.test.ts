@@ -1,9 +1,9 @@
 import { setActivePinia, createPinia } from 'pinia'
 import { useShowsStore } from '../../stores/shows'
 import { beforeEach, describe, expect, it, vi } from 'jest'
-import * as tvmazeService from '../../services/tvmaze'
+import * as tvmazeService from '../../api/tvmaze'
 
-vi.mock('../../services/tvmaze')
+vi.mock('../../api/tvmaze')
 
 describe('Shows Store', () => {
   beforeEach(() => {
