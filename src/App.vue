@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 </script>
 
 <template>
-  <div class="dark-theme bg-dark text-light min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
+  <div class="dark-theme text-light min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-dark dark-theme border-bottom border-secondary">
       <div class="container">
         <router-link class="navbar-brand" to="/">TV Show Browser</router-link>
       </div>
@@ -15,13 +15,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 </template>
 
 <style>
-body {
-  background-color: #212529;
+body,
+.dark-theme {
+  background-color: #030714;
   color: #f8f9fa;
 }
 
 .dark-theme {
   --bs-body-color: #f8f9fa;
-  --bs-body-bg: #212529;
+  --bs-body-bg: #030714;
 }
 </style>
