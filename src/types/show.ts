@@ -8,7 +8,7 @@ export interface Show {
     original: string
   }
   rating: {
-    average: number
+    average?: number
   }
   genres: string[]
   status: string

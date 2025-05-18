@@ -12,27 +12,29 @@
       class="w-100 h-100 d-flex flex-column align-items-center justify-content-center text-light bg-gray-900"
     >
       <font-awesome-icon :icon="['fas', 'image']" class="fallback-icon fs-1 mb-2" />
-      <span class="fallback-text fs-6">{{ fallbackText }}</span>
+      <span v-if="fallbackText" class="fallback-text fs-6">{{ fallbackText }}</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-const props = withDefaults(
-  defineProps<{
-    src?: string
-    alt: string
-    fallbackText?: string
-  }>(),
-  {
-    fallbackText: 'No Image',
-    src: '',
-  }
+const props = defineProps<{
+  src?: string
+  alt: string
+  fallbackText?: string
+}>()
+
+const showFallback = ref(false)
+
+watch(
+  () => props.src,
+  (newSrc) => {
+    showFallback.value = !newSrc || newSrc.trim() === ''
+  },
+  { immediate: true }
 )
-
-const showFallback = ref(!props.src)
 
 const handleImageError = () => {
   showFallback.value = true

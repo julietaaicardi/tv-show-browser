@@ -1,50 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Show } from '../types/show'
-import { getShows, getShowById } from '../api/tvmaze'
-
-type ShowsById = Record<number, Show>
-type Genres = Record<string, number[]>
-
-function normalizeShows(apiShows: Show[]): { showsById: ShowsById; genres: Genres } {
-  const showsById: ShowsById = {}
-  const genres: Genres = {}
-
-  // First pass: create showsById and collect all genres
-  apiShows.forEach(show => {
-    if (!show.id || !show.name) return
-
-    showsById[show.id] = show
-
-    // Initialize genre arrays if they don't exist
-    show.genres?.forEach(genre => {
-      if (!genres[genre]) {
-        genres[genre] = []
-      }
-    })
-  })
-
-  // Second pass: populate genres with sorted show IDs
-  Object.entries(showsById).forEach(([id, show]) => {
-    show.genres?.forEach(genre => {
-      genres[genre].push(Number(id))
-    })
-  })
-
-  // Sort shows in each genre by rating
-  Object.keys(genres).forEach(genre => {
-    genres[genre].sort((a, b) => {
-      const ratingA = showsById[a].rating?.average ?? 0
-      const ratingB = showsById[b].rating?.average ?? 0
-      return ratingB - ratingA
-    })
-  })
-
-  return { showsById, genres }
-}
+import type { ShowsById, Genres } from '../types/store'
+import { getShows, getShowById, searchShows } from '../api/tvmaze'
+import { normalizeShows } from './utilities'
 
 export const useShowsStore = defineStore('shows', () => {
-  // const shows = ref<Show[]>([])
   const showsById = ref<ShowsById>({})
   const genres = ref<Genres>({})
   const currentShow = ref<Show | null>(null)
@@ -57,7 +18,6 @@ export const useShowsStore = defineStore('shows', () => {
     try {
       const apiShows = await getShows()
       const { showsById: normalizedShows, genres: normalizedGenres } = normalizeShows(apiShows)
-      // shows.value = apiShows
       showsById.value = normalizedShows
       genres.value = normalizedGenres
     } catch (e) {
@@ -79,8 +39,21 @@ export const useShowsStore = defineStore('shows', () => {
     }
   }
 
+  function setCurrentShow(show: Show) {
+    currentShow.value = show
+  }
+
+  async function searchShowsByQuery(query: string): Promise<Show[]> {
+    try {
+      const shows = await searchShows(query)
+      return shows
+    } catch (e) {
+      console.error('Error searching shows:', e)
+      throw e
+    }
+  }
+
   return {
-    // shows,
     showsById,
     genres,
     currentShow,
@@ -88,5 +61,7 @@ export const useShowsStore = defineStore('shows', () => {
     error,
     fetchShows,
     fetchShowById,
+    setCurrentShow,
+    searchShowsByQuery
   }
-}) 
+})

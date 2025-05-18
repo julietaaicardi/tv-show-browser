@@ -4,6 +4,9 @@ import './styles/base.css'
 import App from './App.vue'
 import router from './router'
 
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 // Font Awesome
 import './plugins/fontawesome'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

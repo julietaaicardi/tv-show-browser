@@ -10,7 +10,7 @@
         :id="itemId"
         :name="itemsById[itemId].name"
         :image="itemsById[itemId].image.medium"
-        :rating="itemsById[itemId].rating?.average ?? '-'"
+        :rating="itemsById[itemId].rating?.average"
         :year="itemsById[itemId].premiered.split('-')[0]"
       />
     </router-link>

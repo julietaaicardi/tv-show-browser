@@ -1,13 +1,19 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark border-bottom border-secondary">
-    <div class="container">
-      <router-link class="navbar-brand" to="/">TV Show Browser</router-link>
-    </div>
-  </nav>
-
-  <router-view></router-view>
+  <Header @select="handleSelect"/>
+  <router-view/>
 </template>
 
 <script setup lang="ts">
-import 'bootstrap/dist/css/bootstrap.min.css'
+import Header from './components/Header.vue'
+import { useRouter } from 'vue-router'
+import { useShowsStore } from './stores/shows'
+
+const router = useRouter()
+const store = useShowsStore()
+
+function handleSelect(show: Show) {
+  store.setCurrentShow(show)
+  router.push({ name: 'show-detail', params: { id: show.id } })
+}
+
 </script>

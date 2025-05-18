@@ -10,7 +10,7 @@
       />
     </div>
     <div class="card-overlay position-absolute bottom-0 left-0 right-0 p-lg-3 p-2 d-flex flex-column align-items-center justify-content-end w-100 text-light">
-      <Rating :rating="rating" />
+      <Rating v-if="rating" :rating="rating" />
       <h5 class="title text-center fs-5 fw-bold mb-0">{{ name }}</h5>
       <span v-if="year">({{ year }})</span>
     </div>
@@ -25,7 +25,7 @@ defineProps<{
   id: number
   name: string
   image: string
-  rating: number | string
+  rating?: number
   year: string
 }>()
 </script>

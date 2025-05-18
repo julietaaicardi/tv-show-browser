@@ -1,11 +1,6 @@
 <template>
   <div class="container py-4">
-    <Button
-      :to="{ name: 'homepage' }"
-      variant="primary"
-      class="mb-4"
-      icon-front="chevron-left"
-    >
+    <Button :to="{ name: 'homepage' }" variant="primary" class="mb-4" icon-front="chevron-left">
       Back
     </Button>
 
@@ -26,8 +21,7 @@
     <div v-else-if="currentShow" class="row">
       <div class="col-md-4 mb-3 mb-md-0">
         <Image
-          v-if="currentShow.image?.original"
-          :src="currentShow.image.original"
+          :src="currentShow.image?.original"
           :alt="currentShow.name"
           :fallback-text="currentShow.name"
           class="rounded"
@@ -36,8 +30,8 @@
       <div class="col-md-8">
         <div class="d-flex flex-column align-items-start mb-2 text-light">
           <div class="d-flex align-items-center">
-            <Rating :rating="currentShow.rating.average ?? '-'" class="me-1" />
-            <span class="fs-6">({{ currentShow.premiered.split('-')[0] }})</span>
+            <Rating v-if="currentShow.rating.average" :rating="currentShow.rating.average" class="me-1" />
+            <span v-if="currentShow.premiered" class="fs-6">({{ currentShow.premiered.split('-')[0] }})</span>
           </div>
           <h1 class="me-1 mb-0">{{ currentShow.name }}</h1>
         </div>
@@ -56,7 +50,9 @@
         </div>
 
         <div v-if="currentShow.schedule.days.length" class="text-light">
-          <strong>Schedule:</strong> {{ currentShow.schedule.days.map(day => day + 's').join(', ') }} at {{ currentShow.schedule.time }}
+          <strong>Schedule:</strong>
+          {{ currentShow.schedule.days.map(day => day + 's').join(', ') }} at
+          {{ currentShow.schedule.time }}
         </div>
         <div v-if="currentShow.status" class="text-light">
           <strong>Status:</strong> {{ currentShow.status }}
@@ -86,35 +82,43 @@
             variant="outline-light"
             target="_blank"
             iconBack="arrow-up-right-from-square"
-          >
-            Visit official site
+          >Visit official site
           </Button>
-          </div>
-          <div class="mt-4">
-          <div v-if="currentShow.externals" class="text-light">
+        </div>
+        <div class="mt-4">
+          <div v-if="hasAnyExternal(currentShow.externals)" class="text-light">
             <strong>More: </strong>
             <template v-if="currentShow.externals.imdb">
-              <a 
-                :href="`https://www.imdb.com/title/${currentShow.externals.imdb}`" 
-                target="_blank" 
+              <a
+                :href="`https://www.imdb.com/title/${currentShow.externals.imdb}`"
+                target="_blank"
                 class="text-light"
-              >IMDb</a>
+                >IMDb</a>
             </template>
-            <template v-if="currentShow.externals.imdb && (currentShow.externals.thetvdb || currentShow.externals.tvrage)">, </template>
+
+            <template
+              v-if="
+                currentShow.externals.imdb &&
+                (currentShow.externals.thetvdb || currentShow.externals.tvrage)
+              "
+            >, </template>
+
             <template v-if="currentShow.externals.thetvdb">
-              <a 
-                :href="`https://thetvdb.com/series/${currentShow.name.toLowerCase().replace(/\s+/g, '-')}`"
-                target="_blank" 
+              <a
+                :href="`https://thetvdb.com/?id=${currentShow.externals.thetvdb}&tab=series`"
+                target="_blank"
                 class="text-light"
-              >TheTVDB</a>
+                >TheTVDB</a>
             </template>
+
             <template v-if="currentShow.externals.thetvdb && currentShow.externals.tvrage">, </template>
+
             <template v-if="currentShow.externals.tvrage">
-              <a 
-                :href="`https://www.tvrage.com/${currentShow.name.toLowerCase().replace(/\s+/g, '-')}`" 
-                target="_blank" 
+              <a
+                :href="`https://www.tvrage.com/shows/id-${currentShow.externals.tvrage}`"
+                target="_blank"
                 class="text-light"
-              >TVRage</a>
+                >TVRage</a>
             </template>
           </div>
         </div>
@@ -145,8 +149,13 @@ onMounted(() => {
 })
 
 function countryCodeToEmoji(code: string): string {
-  return code
-    .toUpperCase()
-    .replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt(0)))
+  return code.toUpperCase().replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt(0)))
+}
+function hasAnyExternal(externals: Externals): boolean {
+  return Boolean(
+    externals.imdb ||
+    externals.thetvdb ||
+    externals.tvrage
+  )
 }
 </script>

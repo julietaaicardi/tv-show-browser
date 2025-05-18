@@ -6,9 +6,10 @@ import {
   faChevronLeft,
   faChevronRight,
   faImage,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons'
 // Agregá los que uses acá
 
-library.add(faArrowUpRightFromSquare, faStar, faChevronLeft, faChevronRight, faImage)
+library.add(faArrowUpRightFromSquare, faStar, faChevronLeft, faChevronRight, faImage, faSearch)
 
 export { FontAwesomeIcon }

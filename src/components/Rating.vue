@@ -9,6 +9,6 @@
   
   <script setup lang="ts">
   defineProps<{
-    rating: number | string
+    rating: number
   }>()
   </script>
