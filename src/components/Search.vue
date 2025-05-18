@@ -96,8 +96,7 @@ const handleKeydown = (event: KeyboardEvent) => {
       break
     case 'ArrowUp':
       event.preventDefault()
-      activeIndex.value =
-        activeIndex.value <= 0 ? props.results.length - 1 : activeIndex.value - 1
+      activeIndex.value = activeIndex.value <= 0 ? props.results.length - 1 : activeIndex.value - 1
       break
     case 'Enter':
       event.preventDefault()

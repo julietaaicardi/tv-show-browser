@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+echo "🧹 Running Prettier. If it fails, try: npm run format"
+npm run format
+
+echo "🧹 Running ESLint. If it fails, try: npm run lint"
+npm run lint
+
+echo "🔎 Running Type Check (vue-tsc)"
+npm run type-check
