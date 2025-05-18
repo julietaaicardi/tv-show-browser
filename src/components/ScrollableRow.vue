@@ -31,9 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const props = defineProps<{
+defineProps<{
   title: string
 }>()
 
@@ -119,7 +119,9 @@ onMounted(() => {
   width: 100px;
   pointer-events: auto;
   opacity: 0;
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    filter 0.3s ease;
   border: none;
   background: none;
 

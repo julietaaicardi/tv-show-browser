@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="container-fluid text-light border-bottom border-secondary d-flex  justify-content-between align-items-center text-center p-3"
+    class="container-fluid text-light border-bottom border-secondary d-flex justify-content-between align-items-center text-center p-3"
   >
     <router-link :to="{ name: 'homepage' }" class="navbar-brand d-flex align-items-center">
       <div class="logo-wrapper me-2">
@@ -20,7 +20,7 @@
     </div>
 
     <!-- Mobile Search Button -->
-    <button 
+    <button
       class="btn btn-link text-light border-0 d-md-none"
       @click="$emit('openMobileSearch')"
       aria-label="Open search"
@@ -31,30 +31,23 @@
 </template>
 
 <script setup lang="ts">
-import type { ResultItem } from './types/resultItem'
+import type { ResultItem } from '../types'
 import Search from './Search.vue'
 import Image from './Image.vue'
 import logo from '../assets/logo.svg'
 
-const props = defineProps<{
+defineProps<{
   searchResults: ResultItem[]
-}>()
-
-const emit = defineEmits<{
-  (e: 'select', show: ResultItem): void
-  (e: 'search', query: string): void
-  (e: 'clear'): void
-  (e: 'openMobileSearch'): void
 }>()
 </script>
 
 <style scoped>
-    .logo-wrapper {
-    width: 30px;
-    height: 30px;
-    }
+.logo-wrapper {
+  width: 30px;
+  height: 30px;
+}
 
-  .search-wrapper {
-    max-width: 300px;
-  }
+.search-wrapper {
+  max-width: 300px;
+}
 </style>

@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onUnmounted } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import Dropdown from './Dropdown.vue'
 import type { ResultItem } from '../types'
 
@@ -60,7 +60,8 @@ const activeIndex = ref(-1)
 
 const activeResultId = computed(() => {
   if (activeIndex.value >= 0 && props.results[activeIndex.value]) {
-    return `search-result-${props.results[activeIndex.value].id}`
+    const result = props.results[activeIndex.value]
+    return result?.id ? `search-result-${result.id}` : ''
   }
   return ''
 })
@@ -91,18 +92,20 @@ const handleKeydown = (event: KeyboardEvent) => {
   switch (event.key) {
     case 'ArrowDown':
       event.preventDefault()
-      activeIndex.value = (activeIndex.value + 1) % props.results.value.length
+      activeIndex.value = (activeIndex.value + 1) % props.results.length
       break
     case 'ArrowUp':
       event.preventDefault()
-      activeIndex.value = activeIndex.value <= 0 
-        ? props.results.value.length - 1 
-        : activeIndex.value - 1
+      activeIndex.value =
+        activeIndex.value <= 0 ? props.results.length - 1 : activeIndex.value - 1
       break
     case 'Enter':
       event.preventDefault()
-      if (activeIndex.value >= 0) {
-        selectItem(props.results.value[activeIndex.value])
+      if (activeIndex.value >= 0 && props.results[activeIndex.value]) {
+        const result = props.results[activeIndex.value]
+        if (result) {
+          selectItem(result)
+        }
       }
       break
     case 'Escape':
@@ -116,7 +119,7 @@ const selectItem = (item: ResultItem) => {
   emit('select', item)
   searchQuery.value = ''
   showResults.value = false
-  props.results.value = []
+  emit('clear')
 }
 
 const handleBlur = () => {
@@ -141,4 +144,4 @@ input::placeholder {
   color: var(--bs-light);
   opacity: 0.6;
 }
-</style> 
+</style>

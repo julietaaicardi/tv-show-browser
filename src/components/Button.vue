@@ -11,40 +11,58 @@
       `btn-${variant}`,
       size ? `btn-${size}` : '',
       block ? 'w-100' : '',
-      disabled ? 'disabled' : ''
+      disabled ? 'disabled' : '',
     ]"
     :disabled="disabled"
-    @click="onClick">
+    @click="onClick"
+  >
     <!-- Front icon -->
-    <font-awesome-icon v-if="iconFront" :icon="['fas', iconFront]" class="me-2"/>
+    <font-awesome-icon v-if="iconFront" :icon="['fas', iconFront]" class="me-2" />
 
     <slot></slot>
 
     <!-- Back icon -->
-    <font-awesome-icon v-if="iconBack" :icon="['fas', iconBack]" class="ms-2"/>
+    <font-awesome-icon v-if="iconBack" :icon="['fas', iconBack]" class="ms-2" />
   </component>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { RouteLocationRaw } from 'vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 
 interface Props {
   // Link props
   to?: RouteLocationRaw
   href?: string
   target?: '_blank' | '_self' | '_parent' | '_top'
-  
+
   // Button styling
-  variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'link' | 'outline-primary' | 'outline-secondary' | 'outline-success' | 'outline-danger' | 'outline-warning' | 'outline-info' | 'outline-light' | 'outline-dark'
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'light'
+    | 'dark'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-info'
+    | 'outline-light'
+    | 'outline-dark'
   size?: 'sm' | 'lg'
   block?: boolean
   disabled?: boolean
   type?: 'button' | 'submit' | 'reset'
-  
+
   // Icon props
   iconFront?: string // FontAwesome class, e.g., 'fas fa-user'
-  iconBack?: string  // FontAwesome class, e.g., 'fas fa-arrow-right'
+  iconBack?: string // FontAwesome class, e.g., 'fas fa-arrow-right'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -54,7 +72,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'button',
   iconFront: '',
   iconBack: '',
-  target: '_self'
+  target: '_self',
 })
 
 const emit = defineEmits<{
@@ -72,4 +90,4 @@ const onClick = (event: MouseEvent) => {
     emit('click', event)
   }
 }
-</script> 
+</script>

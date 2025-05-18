@@ -7,9 +7,9 @@
             <slot name="header">
               <h5 class="modal-title">{{ title }}</h5>
             </slot>
-            <Button 
-              variant="link" 
-              class="text-light border-0" 
+            <Button
+              variant="link"
+              class="text-light border-0"
               @click="$emit('update:modelValue', false)"
               aria-label="Close"
               icon-back="xmark"
@@ -57,4 +57,4 @@ defineEmits<{
 .modal-fade-leave-to {
   opacity: 0;
 }
-</style> 
+</style>

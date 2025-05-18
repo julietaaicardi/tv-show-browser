@@ -32,4 +32,4 @@ export interface Show {
     thetvdb: number
     tvrage: number
   }
-} 
+}

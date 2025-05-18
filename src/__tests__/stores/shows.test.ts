@@ -42,4 +42,4 @@ describe('Shows Store', () => {
     expect(store.loading).toBe(false)
     expect(store.error).toBe(errorMessage)
   })
-}) 
+})

@@ -30,8 +30,14 @@
       <div class="col-md-8">
         <div class="d-flex flex-column align-items-start mb-2 text-light">
           <div class="d-flex align-items-center">
-            <Rating v-if="currentShow.rating.average" :rating="currentShow.rating.average" class="me-1" />
-            <span v-if="currentShow.premiered" class="fs-6">({{ currentShow.premiered.split('-')[0] }})</span>
+            <Rating
+              v-if="currentShow.rating.average"
+              :rating="currentShow.rating.average"
+              class="me-1"
+            />
+            <span v-if="currentShow.premiered" class="fs-6"
+              >({{ currentShow.premiered.split('-')[0] }})</span
+            >
           </div>
           <h1 class="me-1 mb-0">{{ currentShow.name }}</h1>
         </div>
@@ -82,7 +88,7 @@
             variant="outline-light"
             target="_blank"
             iconBack="arrow-up-right-from-square"
-          >Visit official site
+            >Visit official site
           </Button>
         </div>
         <div class="mt-4">
@@ -93,7 +99,8 @@
                 :href="`https://www.imdb.com/title/${currentShow.externals.imdb}`"
                 target="_blank"
                 class="text-light"
-                >IMDb</a>
+                >IMDb</a
+              >
             </template>
 
             <template
@@ -101,24 +108,29 @@
                 currentShow.externals.imdb &&
                 (currentShow.externals.thetvdb || currentShow.externals.tvrage)
               "
-            >, </template>
+              >,
+            </template>
 
             <template v-if="currentShow.externals.thetvdb">
               <a
                 :href="`https://thetvdb.com/?id=${currentShow.externals.thetvdb}&tab=series`"
                 target="_blank"
                 class="text-light"
-                >TheTVDB</a>
+                >TheTVDB</a
+              >
             </template>
 
-            <template v-if="currentShow.externals.thetvdb && currentShow.externals.tvrage">, </template>
+            <template v-if="currentShow.externals.thetvdb && currentShow.externals.tvrage"
+              >,
+            </template>
 
             <template v-if="currentShow.externals.tvrage">
               <a
                 :href="`https://www.tvrage.com/shows/id-${currentShow.externals.tvrage}`"
                 target="_blank"
                 class="text-light"
-                >TVRage</a>
+                >TVRage</a
+              >
             </template>
           </div>
         </div>
@@ -142,7 +154,7 @@ const store = useShowsStore()
 const { currentShow, loading, error } = storeToRefs(store)
 
 onMounted(() => {
-  const id = Number(route.params.id)
+  const id = Number(route.params['id'])
   if (!isNaN(id)) {
     store.fetchShowById(id)
   }
@@ -151,11 +163,8 @@ onMounted(() => {
 function countryCodeToEmoji(code: string): string {
   return code.toUpperCase().replace(/./g, char => String.fromCodePoint(127397 + char.charCodeAt(0)))
 }
-function hasAnyExternal(externals: Externals): boolean {
-  return Boolean(
-    externals.imdb ||
-    externals.thetvdb ||
-    externals.tvrage
-  )
+function hasAnyExternal(externals: { imdb?: string; thetvdb?: number; tvrage?: number }): boolean {
+  if (!externals) return false
+  return Object.values(externals).some(value => value != null && value !== '')
 }
 </script>

@@ -1,8 +1,5 @@
 <template>
-  <span
-    class="badge"
-    :class="[`bg-${variant}`, { 'rounded-pill': pill }]"
-  >
+  <span class="badge" :class="[`bg-${variant}`, { 'rounded-pill': pill }]">
     <slot></slot>
   </span>
 </template>
@@ -15,6 +12,6 @@ interface BadgeProps {
 
 withDefaults(defineProps<BadgeProps>(), {
   variant: 'primary',
-  pill: false
+  pill: false,
 })
 </script>

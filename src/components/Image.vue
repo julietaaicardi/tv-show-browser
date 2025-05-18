@@ -30,7 +30,7 @@ const showFallback = ref(false)
 
 watch(
   () => props.src,
-  (newSrc) => {
+  newSrc => {
     showFallback.value = !newSrc || newSrc.trim() === ''
   },
   { immediate: true }

@@ -39,7 +39,7 @@ export const useShowsStore = defineStore('shows', () => {
   }
 
   function setCurrentShowById(id: number) {
-    currentShow.value = showsById.value[id]
+    currentShow.value = showsById.value[id] ?? null
   }
 
   async function searchShowsByQuery(query: string): Promise<Show[]> {
@@ -61,6 +61,6 @@ export const useShowsStore = defineStore('shows', () => {
     fetchShows,
     fetchShowById,
     setCurrentShowById,
-    searchShowsByQuery
+    searchShowsByQuery,
   }
 })

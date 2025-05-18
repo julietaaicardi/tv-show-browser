@@ -36,11 +36,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import Image from './Image.vue'
 import type { ResultItem } from '../types'
 
-const props = defineProps<{
+defineProps<{
   visible: boolean
   items: ResultItem[]
   isLoading: boolean
@@ -49,13 +49,13 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'select', item: Show): void
+  (e: 'select', item: ResultItem): void
   (e: 'update:activeIndex', index: number): void
 }>()
 
 const activeIndex = ref(-1)
 
-const selectItem = (item: Show) => {
+const selectItem = (item: ResultItem) => {
   emit('select', item)
 }
 

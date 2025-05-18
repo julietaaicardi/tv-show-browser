@@ -1,13 +1,13 @@
 <template>
   <div class="container-fluid py-4 py-lg-5">
     <div class="d-flex flex-column text-light py-5 text-center">
-        <div class="d-flex justify-content-center align-items-center mb-3">
-          <span class="fs-1 me-2">🎬</span>
-          <h1 class="display-5 fw-bold m-0">Top-Rated Series</h1>
-        </div>
-        <p class="lead text-secondary">
-          Discover timeless dramas and sci-fi adventures loved by fans worldwide
-        </p>
+      <div class="d-flex justify-content-center align-items-center mb-3">
+        <span class="fs-1 me-2">🎬</span>
+        <h1 class="display-5 fw-bold m-0">Top-Rated Series</h1>
+      </div>
+      <p class="lead text-secondary">
+        Discover timeless dramas and sci-fi adventures loved by fans worldwide
+      </p>
     </div>
 
     <div v-if="loading" class="text-center">

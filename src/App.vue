@@ -1,22 +1,19 @@
 <template>
-  <Header 
-    @select="handleSelect" 
-    @search="handleSearch" 
-    @clear="handleClear" 
+  <Header
+    @select="handleSelect"
+    @search="handleSearch"
+    @clear="handleClear"
     @openMobileSearch="showMobileSearch = true"
     :searchResults="searchResults"
   />
-  <router-view/>
+  <router-view />
 
   <!-- Mobile Search Modal -->
-  <Modal
-    v-model="showMobileSearch"
-    title="Search TV Shows"
-  >
+  <Modal v-model="showMobileSearch" title="Search TV Shows">
     <template #header>
       <h5 class="modal-title text-light">Search TV Shows</h5>
     </template>
-    
+
     <Search
       @select="handleMobileSelect"
       @search="handleSearch"
@@ -54,7 +51,7 @@ function handleMobileSelect(selectedItem: ResultItem) {
 async function handleSearch(query: string) {
   try {
     const shows: Show[] = await store.searchShowsByQuery(query)
-    searchResults.value = shows.map((show) => ({
+    searchResults.value = shows.map(show => ({
       id: show.id,
       name: show.name,
       image: show.image?.medium ?? '',
