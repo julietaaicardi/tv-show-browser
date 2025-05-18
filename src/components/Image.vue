@@ -19,11 +19,6 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faImage } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faImage)
 
 const props = withDefaults(
   defineProps<{

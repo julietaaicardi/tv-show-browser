@@ -15,5 +15,21 @@ export interface Show {
   premiered: string
   network: {
     name: string
+    officialSite: string
+    country: {
+      code: string
+    }
+  }
+  officialSite: string
+  language: string
+  runtime: number
+  schedule: {
+    time: string
+    days: string[]
+  }
+  externals: {
+    imdb: string
+    thetvdb: number
+    tvrage: number
   }
 } 

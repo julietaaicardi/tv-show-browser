@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 
 // Font Awesome
-import { library } from '@fortawesome/fontawesome-svg-core'
+import './plugins/fontawesome'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 

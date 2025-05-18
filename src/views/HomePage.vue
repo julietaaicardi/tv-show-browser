@@ -24,7 +24,7 @@
 
     <div v-else>
       <div v-for="(showIds, genre) in genres" :key="genre" class="genre-wrapper">
-        <Section :genre="genre" :show-ids="showIds" :shows-by-id="showsById" />
+        <Section :title="genre" :item-ids="showIds" :items-by-id="showsById" />
       </div>
     </div>
   </div>

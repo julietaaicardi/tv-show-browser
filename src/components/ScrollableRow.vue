@@ -32,11 +32,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faChevronLeft, faChevronRight)
 
 const props = defineProps<{
   title: string
