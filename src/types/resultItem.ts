@@ -1,5 +1,6 @@
 export interface ResultItem {
-    name: string
-    image: string
-    year: string
-  }
+  id: number
+  name: string
+  image: string
+  year: string
+}

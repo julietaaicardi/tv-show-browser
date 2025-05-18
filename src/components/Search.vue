@@ -4,12 +4,12 @@
       <input
         type="search"
         class="form-control bg-dark text-light border-secondary"
-        placeholder="Search TV shows..."
+        placeholder="Search..."
         v-model="searchQuery"
         @input="handleInput"
         @keydown="handleKeydown"
         @blur="handleBlur"
-        aria-label="Search TV shows"
+        aria-label="Search"
         :aria-expanded="showResults"
         :aria-activedescendant="activeResultId"
         role="combobox"
@@ -30,7 +30,7 @@
       :isLoading="isLoading"
       :error="error"
       :query="searchQuery"
-      @select="selectShow"
+      @select="selectItem"
       @update:activeIndex="activeIndex = $event"
     />
   </div>
@@ -47,7 +47,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'select', show: Show): void
+  (e: 'select', item: ResultItem): void
   (e: 'search', query: string): void
   (e: 'clear'): void
 }>()
@@ -77,6 +77,7 @@ const performSearch = () => {
   if (!query) {
     emit('clear')
     error.value = ''
+    showResults.value = false
     return
   }
 
@@ -101,7 +102,7 @@ const handleKeydown = (event: KeyboardEvent) => {
     case 'Enter':
       event.preventDefault()
       if (activeIndex.value >= 0) {
-        selectShow(props.results.value[activeIndex.value])
+        selectItem(props.results.value[activeIndex.value])
       }
       break
     case 'Escape':
@@ -111,8 +112,8 @@ const handleKeydown = (event: KeyboardEvent) => {
   }
 }
 
-const selectShow = (show: Show) => {
-  emit('select', show)
+const selectItem = (item: ResultItem) => {
+  emit('select', item)
   searchQuery.value = ''
   showResults.value = false
   props.results.value = []
@@ -135,5 +136,9 @@ onUnmounted(() => {
 .form-control:focus {
   background-color: var(--bs-dark);
   color: var(--bs-light);
+}
+input::placeholder {
+  color: var(--bs-light);
+  opacity: 0.6;
 }
 </style> 

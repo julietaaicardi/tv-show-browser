@@ -15,14 +15,15 @@ const searchResults = ref<ResultItem[]>([])
 const router = useRouter()
 const store = useShowsStore()
 
-function handleSelect(show: Show) {
-  store.setCurrentShow(show)
-  router.push({ name: 'show-detail', params: { id: show.id } })
+function handleSelect(selectedItem: ResultItem) {
+  store.setCurrentShowById(selectedItem.id)
+  router.push({ name: 'show-detail', params: { id: selectedItem.id } })
 }
 async function handleSearch(query: string) {
   try {
     const shows: Show[] = await store.searchShowsByQuery(query)
     searchResults.value = shows.map((show) => ({
+      id: show.id,
       name: show.name,
       image: show.image?.medium ?? '',
       year: show.premiered?.split('-')[0] ?? '—',

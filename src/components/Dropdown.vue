@@ -14,8 +14,7 @@
       <button
         v-for="(item, index) in items"
         :key="item.id"
-        class="d-flex align-items-center w-100 p-2 border-0 text-start text-light bg-transparent"
-        :class="{ 'bg-primary': index === activeIndex }"
+        class="d-flex align-items-center w-100 p-2 border-0 text-start text-light overflow-hidden"
         @mouseenter="activeIndex = index"
         @mousedown.prevent="selectItem(item)"
         :id="`search-result-${item.id}`"
@@ -23,14 +22,10 @@
         :aria-selected="index === activeIndex"
       >
         <div class="image-container flex-shrink-0 me-2">
-          <Image
-            :src="item.image"
-            :alt="item.name"
-            class="rounded"
-          />
+          <Image :src="item.image" :alt="item.name" class="rounded" />
         </div>
-        <div class="flex-grow-1 min-w-0">
-          <div class="text-truncate">{{ item.name }}</div>
+        <div class="flex-grow-1 overflow-hidden">
+          <div class="text-truncate d-block w-100">{{ item.name }}</div>
           <small class="text-secondary" v-if="item.year">
             {{ item.year }}
           </small>
@@ -65,7 +60,7 @@ const selectItem = (item: Show) => {
 }
 
 // Watch for active index changes and emit them
-watch(activeIndex, (newIndex) => {
+watch(activeIndex, newIndex => {
   emit('update:activeIndex', newIndex)
 })
 </script>
@@ -76,6 +71,6 @@ watch(activeIndex, (newIndex) => {
   height: 63px;
 }
 button:hover {
-  background-color: var(--bs-primary) !important;
+  background-color: var(--bs-gray-800);
 }
-</style> 
+</style>

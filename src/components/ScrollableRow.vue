@@ -118,7 +118,6 @@ onMounted(() => {
 .scroll-arrow {
   width: 100px;
   pointer-events: auto;
-  z-index: 10;
   opacity: 0;
   transition: opacity 0.3s ease, filter 0.3s ease;
   border: none;

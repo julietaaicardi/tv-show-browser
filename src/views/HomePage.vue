@@ -45,10 +45,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.container-fluid {
-  max-width: 1800px;
-}
-
 .genre-wrapper {
   margin-bottom: 4rem;
 }
