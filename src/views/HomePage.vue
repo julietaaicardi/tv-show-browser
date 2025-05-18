@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid py-4 py-lg-5">
+  <div class="container-fluid py-4 py-lg-5 px-3">
     <div class="d-flex flex-column text-light py-5 text-center">
       <div class="d-flex justify-content-center align-items-center mb-3">
         <span class="fs-1 me-2">🎬</span>

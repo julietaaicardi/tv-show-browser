@@ -38,10 +38,6 @@ export const useShowsStore = defineStore('shows', () => {
     }
   }
 
-  function setCurrentShowById(id: number) {
-    currentShow.value = showsById.value[id] ?? null
-  }
-
   async function searchShowsByQuery(query: string): Promise<Show[]> {
     try {
       const shows = await searchShows(query)
@@ -60,7 +56,6 @@ export const useShowsStore = defineStore('shows', () => {
     error,
     fetchShows,
     fetchShowById,
-    setCurrentShowById,
     searchShowsByQuery,
   }
 })

@@ -39,7 +39,7 @@ const router = useRouter()
 const store = useShowsStore()
 
 function handleSelect(selectedItem: ResultItem) {
-  store.setCurrentShowById(selectedItem.id)
+  store.fetchShowById(selectedItem.id)
   router.push({ name: 'show-detail', params: { id: selectedItem.id } })
 }
 

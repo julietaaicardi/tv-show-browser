@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-4">
+  <div class="container py-4 px-3 px-md-0">
     <Button :to="{ name: 'homepage' }" variant="primary" class="mb-4" icon-front="chevron-left">
       Back
     </Button>
