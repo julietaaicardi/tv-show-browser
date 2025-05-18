@@ -7,9 +7,10 @@ import {
   faChevronRight,
   faImage,
   faSearch,
+  faXmark
 } from '@fortawesome/free-solid-svg-icons'
 // Agregá los que uses acá
 
-library.add(faArrowUpRightFromSquare, faStar, faChevronLeft, faChevronRight, faImage, faSearch)
+library.add(faArrowUpRightFromSquare, faStar, faChevronLeft, faChevronRight, faImage, faSearch, faXmark)
 
 export { FontAwesomeIcon }
