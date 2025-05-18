@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="image-container w-100 h-100 position-relative overflow-hidden"
-    :class="{ 'has-error': showFallback }"
-  >
+  <div class="image-container w-100 h-100 position-relative overflow-hidden">
     <img
       v-if="!showFallback"
       :src="src"
@@ -12,12 +9,10 @@
     />
     <div
       v-else
-      class="fallback-container w-100 h-100 d-flex align-items-center justify-content-center text-light"
+      class="w-100 h-100 d-flex flex-column align-items-center justify-content-center text-light bg-gray-900"
     >
-      <div class="d-flex flex-column align-items-center">
-        <font-awesome-icon :icon="['fas', 'image']" class="fallback-icon fs-1 mb-2" />
-        <span class="fallback-text fs-6">{{ fallbackText }}</span>
-      </div>
+      <font-awesome-icon :icon="['fas', 'image']" class="fallback-icon fs-1 mb-2" />
+      <span class="fallback-text fs-6">{{ fallbackText }}</span>
     </div>
   </div>
 </template>
@@ -49,24 +44,20 @@ const handleImageError = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../styles/_variables.scss';
-
+<style scoped lang="scss">
 .image-container {
   img {
     object-fit: cover;
   }
 }
 
-.fallback-container {
-  background: $gray-900;
-}
+.fallback {
+  &-icon {
+    opacity: 0.7;
+  }
 
-.fallback-icon {
-  opacity: 0.7;
-}
-
-.fallback-text {
-  opacity: 0.8;
+  &-text {
+    opacity: 0.8;
+  }
 }
 </style>

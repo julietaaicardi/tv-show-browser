@@ -22,9 +22,9 @@
       </div>
     </div>
 
-    <div v-else class="genres-container">
-      <div v-for="(showIds, genre) in genres" :key="genre" class="genre-row">
-        <GenreRow :genre="genre" :show-ids="showIds" :shows-by-id="showsById" />
+    <div v-else>
+      <div v-for="(showIds, genre) in genres" :key="genre" class="genre-wrapper">
+        <Section :genre="genre" :show-ids="showIds" :shows-by-id="showsById" />
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
 import { onMounted } from 'vue'
 import { useShowsStore } from '../stores/shows'
 import { storeToRefs } from 'pinia'
-import GenreRow from '../components/GenreRow.vue'
+import Section from '../components/Section.vue'
 
 const store = useShowsStore()
 const { showsById, genres, loading, error } = storeToRefs(store)
@@ -49,7 +49,7 @@ onMounted(() => {
   max-width: 1800px;
 }
 
-.genre-row {
+.genre-wrapper {
   margin-bottom: 4rem;
 }
 </style>

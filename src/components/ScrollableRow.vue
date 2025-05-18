@@ -4,7 +4,7 @@
     <!-- Left Arrow -->
     <button
       v-if="isNonTouchDevice"
-      class="scroll-arrow left fs-2 px-4 d-flex align-items-center justify-content-start position-absolute top-0 bottom-0"
+      class="scroll-arrow left text-light fs-2 px-4 d-flex align-items-center justify-content-start position-absolute top-0 bottom-0"
       :class="{ visible: showLeftArrow }"
       @click="scrollLeft"
       aria-label="Scroll left"
@@ -20,7 +20,7 @@
     <!-- Right Arrow -->
     <button
       v-if="isNonTouchDevice"
-      class="scroll-arrow right fs-2 px-4 d-flex align-items-center justify-content-end position-absolute top-0 bottom-0"
+      class="scroll-arrow right text-light fs-2 px-4 d-flex align-items-center justify-content-end position-absolute top-0 bottom-0"
       :class="{ visible: showRightArrow }"
       @click="scrollRight"
       aria-label="Scroll right"
@@ -60,7 +60,7 @@ const updateArrowVisibility = () => {
 }
 
 const getScrollAmount = (): number => {
-  const card = scrollContainer.value?.querySelector('.show-card') as HTMLElement
+  const card = scrollContainer.value?.querySelector('.card') as HTMLElement
   if (!card) return 400
 
   const viewport = window.innerWidth
@@ -101,8 +101,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import '../styles/_variables.scss';
-
 .scrollable-container {
   overflow-x: hidden;
 }
@@ -115,11 +113,11 @@ onMounted(() => {
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-}
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.scrollable-content::-webkit-scrollbar {
-  display: none;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .scroll-arrow {
@@ -127,28 +125,41 @@ onMounted(() => {
   pointer-events: auto;
   z-index: 10;
   opacity: 0;
-  transition: opacity 0.3s ease, color 0.2s ease;
+  transition: opacity 0.3s ease, filter 0.3s ease;
   border: none;
   background: none;
-  color: $gray-100;
-}
 
-.scroll-arrow:hover {
-  color: $gray-500;
-}
+  &.visible {
+    opacity: 1;
+  }
 
-.scroll-arrow.visible {
-  opacity: 1;
-}
+  &:hover {
+    .arrow-icon {
+      transition: transform 0.2s ease;
+    }
+  }
 
-.scroll-arrow.left {
-  left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 1), transparent);
-}
+  &.left {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 1), transparent);
 
-.scroll-arrow.right {
-  right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent);
+    &:hover {
+      .arrow-icon {
+        transform: translateX(-5px);
+      }
+    }
+  }
+
+  &.right {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent);
+
+    &:hover {
+      .arrow-icon {
+        transform: translateX(5px);
+      }
+    }
+  }
 }
 
 /* Touch device styles (no arrows, full width content) */

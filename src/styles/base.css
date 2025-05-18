@@ -1,5 +1,3 @@
-@import './_variables.scss';
-
 /* RESET & BASE STYLES */
 *, *::before, *::after {
   box-sizing: border-box;

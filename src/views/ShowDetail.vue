@@ -20,7 +20,7 @@
 
     <div v-else-if="currentShow" class="row">
       <div class="col-md-4">
-        <ImageWithFallback
+        <Image
           v-if="currentShow.image?.original"
           :src="currentShow.image.original"
           :alt="currentShow.name"
@@ -29,9 +29,12 @@
         />
       </div>
       <div class="col-md-8">
-        <h1 class="mb-3 text-light">{{ currentShow.name }}</h1>
-        <div v-if="currentShow.rating?.average" class="mb-3 text-light">
-          <strong>Rating:</strong> {{ currentShow.rating.average }}/10
+        <div class="d-flex flex-column align-items-start mb-3 text-light">
+          <div class="d-flex align-items-center">
+            <font-awesome-icon :icon="['fas', 'star']" class="text-warning fs-6 me-1" />
+            <span class="fs-6">{{ currentShow.rating.average }}</span>
+          </div>
+          <h1 class="me-1">{{ currentShow.name }}</h1>
         </div>
         <div v-if="currentShow.genres.length" class="mb-3">
           <strong class="text-light">Genres:</strong>
@@ -47,7 +50,7 @@
           <strong>Status:</strong> {{ currentShow.status }}
         </div>
         <div v-if="currentShow.premiered" class="mb-3 text-light">
-          <strong>Premiered:</strong> {{ currentShow.premiered }}
+          <strong>Premiered:</strong> {{ currentShow.premiered.split('-')[0] }}
         </div>
         <div v-if="currentShow.network?.name" class="mb-3 text-light">
           <strong>Network:</strong> {{ currentShow.network.name }}
@@ -63,7 +66,12 @@ import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShowsStore } from '../stores/shows'
 import { storeToRefs } from 'pinia'
-import ImageWithFallback from '../components/ImageWithFallback.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import Image from '../components/Image.vue'
+
+library.add(faStar)
 
 const route = useRoute()
 const store = useShowsStore()
