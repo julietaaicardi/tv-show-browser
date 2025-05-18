@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
+import type { Show } from '../types'
 import Card from './Card.vue'
 import ScrollableRow from './ScrollableRow.vue'
-import type { Show } from '../types/show'
 
 defineProps<{
   title: string

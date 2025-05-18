@@ -1,19 +1,39 @@
 <template>
-  <Header @select="handleSelect"/>
+  <Header @select="handleSelect" @search="handleSearch" @clear="handleClear" :searchResults="searchResults"/>
   <router-view/>
 </template>
 
 <script setup lang="ts">
-import Header from './components/Header.vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useShowsStore } from './stores/shows'
+import type { Show } from './types/show'
+import type { ResultItem } from './types/resultItem'
+import Header from './components/Header.vue'
 
+const searchResults = ref<ResultItem[]>([])
 const router = useRouter()
 const store = useShowsStore()
 
 function handleSelect(show: Show) {
   store.setCurrentShow(show)
   router.push({ name: 'show-detail', params: { id: show.id } })
+}
+async function handleSearch(query: string) {
+  try {
+    const shows: Show[] = await store.searchShowsByQuery(query)
+    searchResults.value = shows.map((show) => ({
+      name: show.name,
+      image: show.image?.medium ?? '',
+      year: show.premiered?.split('-')[0] ?? '—',
+    }))
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+function handleClear() {
+  searchResults.value = []
 }
 
 </script>

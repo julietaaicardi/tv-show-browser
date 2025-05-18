@@ -1,6 +1,5 @@
 
-import type { Show } from '../types/show'
-import type { ShowsById, Genres } from '../types/store'
+import type { Show, ShowsById, Genres } from '../types'
 export const normalizeShows = function normalizeShows(apiShows: Show[]): { showsById: ShowsById; genres: Genres } {
     const showsById: ShowsById = {}
     const genres: Genres = {}

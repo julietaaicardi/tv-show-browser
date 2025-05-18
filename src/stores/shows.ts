@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Show } from '../types/show'
-import type { ShowsById, Genres } from '../types/store'
+import type { Show, ShowsById, Genres } from '../types'
 import { getShows, getShowById, searchShows } from '../api/tvmaze'
 import { normalizeShows } from './utilities'
 

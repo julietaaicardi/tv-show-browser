@@ -24,15 +24,15 @@
       >
         <div class="image-container flex-shrink-0 me-2">
           <Image
-            :src="item.image?.medium"
+            :src="item.image"
             :alt="item.name"
             class="rounded"
           />
         </div>
         <div class="flex-grow-1 min-w-0">
           <div class="text-truncate">{{ item.name }}</div>
-          <small class="text-secondary" v-if="item.premiered">
-            {{ item.premiered.split('-')[0] }}
+          <small class="text-secondary" v-if="item.year">
+            {{ item.year }}
           </small>
         </div>
       </button>
@@ -43,24 +43,11 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import Image from './Image.vue'
-
-interface options {
-  id: number
-  name: string
-  image?: {
-    medium?: string
-  }
-  premiered?: string
-}
+import type { ResultItem } from '../types'
 
 const props = defineProps<{
   visible: boolean
-  // items: Item[]
-  items: Item[]
-  // name: string
-  // image: string
-  // premiered: string
-
+  items: ResultItem[]
   isLoading: boolean
   error: string
   query: string

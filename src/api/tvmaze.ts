@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { Show } from '../types/show'
+import type { Show } from '../types'
 
 const api = axios.create({
   baseURL: 'https://api.tvmaze.com',

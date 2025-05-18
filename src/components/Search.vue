@@ -38,28 +38,29 @@
 
 <script setup lang="ts">
 import { ref, watch, computed, onUnmounted } from 'vue'
-import { useShowsStore } from '../stores/shows'
 import Dropdown from './Dropdown.vue'
+import type { ResultItem } from '../types'
 
 const props = defineProps<{
   initialQuery?: string
+  results: ResultItem[]
 }>()
 
 const emit = defineEmits<{
   (e: 'select', show: Show): void
+  (e: 'search', query: string): void
+  (e: 'clear'): void
 }>()
 
-const store = useShowsStore()
 const searchQuery = ref(props.initialQuery || '')
-const results = ref<Show[]>([])
 const isLoading = ref(false)
 const error = ref('')
 const showResults = ref(false)
 const activeIndex = ref(-1)
 
 const activeResultId = computed(() => {
-  if (activeIndex.value >= 0 && results.value[activeIndex.value]) {
-    return `search-result-${results.value[activeIndex.value].id}`
+  if (activeIndex.value >= 0 && props.results[activeIndex.value]) {
+    return `search-result-${props.results[activeIndex.value].id}`
   }
   return ''
 })
@@ -71,47 +72,36 @@ const handleInput = () => {
   debounceTimeout = window.setTimeout(performSearch, 400)
 }
 
-const performSearch = async () => {
+const performSearch = () => {
   const query = searchQuery.value.trim()
   if (!query) {
-    results.value = []
+    emit('clear')
     error.value = ''
     return
   }
 
-  isLoading.value = true
-  error.value = ''
+  emit('search', query)
   showResults.value = true
-
-  try {
-    results.value = await store.searchShowsByQuery(query)
-    activeIndex.value = -1
-  } catch (err) {
-    error.value = 'Failed to fetch results. Please try again.'
-    results.value = []
-  } finally {
-    isLoading.value = false
-  }
 }
 
 const handleKeydown = (event: KeyboardEvent) => {
-  if (!showResults.value || !results.value.length) return
+  if (!showResults.value || !props.results.length) return
 
   switch (event.key) {
     case 'ArrowDown':
       event.preventDefault()
-      activeIndex.value = (activeIndex.value + 1) % results.value.length
+      activeIndex.value = (activeIndex.value + 1) % props.results.value.length
       break
     case 'ArrowUp':
       event.preventDefault()
       activeIndex.value = activeIndex.value <= 0 
-        ? results.value.length - 1 
+        ? props.results.value.length - 1 
         : activeIndex.value - 1
       break
     case 'Enter':
       event.preventDefault()
       if (activeIndex.value >= 0) {
-        selectShow(results.value[activeIndex.value])
+        selectShow(props.results.value[activeIndex.value])
       }
       break
     case 'Escape':
@@ -123,10 +113,9 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 const selectShow = (show: Show) => {
   emit('select', show)
-  store.setCurrentShow(show) // Optional: Update store
   searchQuery.value = ''
   showResults.value = false
-  results.value = []
+  props.results.value = []
 }
 
 const handleBlur = () => {
