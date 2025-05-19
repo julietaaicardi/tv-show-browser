@@ -83,8 +83,8 @@
 
         <div class="mt-4">
           <Button
-            v-if="currentShow.officialSite"
-            :href="currentShow.officialSite"
+            v-if="currentShow.network.officialSite"
+            :href="currentShow.network.officialSite"
             variant="outline-light"
             target="_blank"
             iconBack="arrow-up-right-from-square"
