@@ -92,27 +92,18 @@ src/
 
 This project uses the [TVMaze API](https://www.tvmaze.com/api) to fetch TV show data. The API is free to use and doesn't require authentication for basic endpoints.
 
-### Future code improvements
+### Known limitations
 
-  - Implement a Node.js backend to handle TVmaze API calls and caching
-  - Add proper error handling and retry mechanisms for API calls
-  - Implement state management (Pinia/Vuex) for better data flow
-  - Add unit and integration tests using Vitest
-  - Implement proper TypeScript types for API responses
-  - Add proper loading states and error boundaries
-  - Implement proper SEO meta tags and sitemap
-  - Add proper image optimization and lazy loading
-  - Implement proper caching strategies for API responses
-
+  - App.vue and the view components currently handle interactions with the store directly. This breaks separation of concerns. Ideally, this logic should be moved into dedicated container components.
+  - No pagination is implemented for search results — only the first page is shown. This limits the ranking to the top results of a single API call. A better approach would involve a backend that filters shows by ranking.
+  - Some Husky pre-commit checks are implemented locally only. These should be moved to a GitHub Actions pipeline to ensure validation before merging.
+  - Accessibility could be improved, especially for navigation arrows in horizontally scrollable rows. E.g. adding a better coverage for keyboard navigation or proper ARIA labels.
+  - Contrast and general accessibility checks (e.g. color contrast ratios, focus indicators) are pending a full audit.
+  - Images are not yet lazy-loaded or optimized, which may impact performance on slower connections.
+  
 ### Features: New ideas to implement
 
-  - Add a related shows section based on matching genres in show detail page
-  - Implement episode list with season grouping in show detail page
-  - Add user watchlist functionality with local storage
-  - Implement show recommendations based on user's watch history
-  - Add advanced filters (by network, status, language)
-  - Implement show comparison feature
-  - Add cast and crew information with their other works
-  - Implement show schedule/calendar view
-  - Add social sharing functionality
-  - Implement dark/light theme toggle
+  - Add “Related shows” section based on genre overlap.
+  - Display all episodes grouped by season in the detail page.
+  - Add advanced filters.
+  - Allow users to switch between light and dark mode.
