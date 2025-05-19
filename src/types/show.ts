@@ -1,4 +1,3 @@
-//TODO: check if I use all in this type
 export interface Show {
   id: number
   name: string
