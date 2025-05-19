@@ -24,7 +24,7 @@
 
     <div v-else>
       <div v-for="(showIds, genre) in genres" :key="genre" class="genre-wrapper">
-        <Section :title="genre" :item-ids="showIds" :items-by-id="showsById" />
+        <ContentGroup :title="genre" :item-ids="showIds" :items-by-id="showsById" />
       </div>
     </div>
   </div>
@@ -32,9 +32,9 @@
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useShowsStore } from '../stores/shows'
+import { useShowsStore } from '@/stores/shows'
 import { storeToRefs } from 'pinia'
-import Section from '../components/Section.vue'
+import ContentGroup from '@/components/ContentGroup.vue'
 
 const store = useShowsStore()
 const { showsById, genres, loading, error } = storeToRefs(store)

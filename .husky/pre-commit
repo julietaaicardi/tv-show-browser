@@ -1,9 +1,6 @@
 #!/usr/bin/env sh
-echo "🧹 Running Prettier. If it fails, try: npm run format"
+. "$(dirname -- "$0")/_/husky.sh"
+
 npm run format
-
-echo "🧹 Running ESLint. If it fails, try: npm run lint"
-npm run lint
-
-echo "🔎 Running Type Check (vue-tsc)"
-npm run type-check
+npm run check
+npm run test

@@ -61,8 +61,8 @@ interface Props {
   type?: 'button' | 'submit' | 'reset'
 
   // Icon props
-  iconFront?: string // FontAwesome class, e.g., 'fas fa-user'
-  iconBack?: string // FontAwesome class, e.g., 'fas fa-arrow-right'
+  iconFront?: string
+  iconBack?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
