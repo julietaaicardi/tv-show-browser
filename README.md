@@ -76,6 +76,10 @@ src/
 └── assets/        # Static assets
 ```
 
+## API
+
+This project uses the [TVMaze API](https://www.tvmaze.com/api) to fetch TV show data. The API is free to use and doesn't require authentication for basic endpoints.
+
 ## Features
 
 - Browse TV shows from TVMaze API
@@ -88,10 +92,6 @@ src/
 - Git hooks with Husky
 - Icon support with Font Awesome
 
-## API
-
-This project uses the [TVMaze API](https://www.tvmaze.com/api) to fetch TV show data. The API is free to use and doesn't require authentication for basic endpoints.
-
 ### Known limitations
 
   - App.vue and the view components currently handle interactions with the store directly. This breaks separation of concerns. Ideally, this logic should be moved into dedicated container components.
@@ -101,7 +101,7 @@ This project uses the [TVMaze API](https://www.tvmaze.com/api) to fetch TV show 
   - Contrast and general accessibility checks (e.g. color contrast ratios, focus indicators) are pending a full audit.
   - Images are not yet lazy-loaded or optimized, which may impact performance on slower connections.
   
-### Features: New ideas to implement
+### What's next: New ideas to implement later
 
   - Add “Related shows” section based on genre overlap.
   - Display all episodes grouped by season in the detail page.
